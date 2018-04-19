@@ -13,6 +13,7 @@ import * as Options from '../entities/Options'
 import * as OptionsIO from '../io/OptionsIO'
 import OptionsInputKeys from './OptionsInputKeys'
 import OptionsInputScratch from './OptionsInputScratch'
+import OptionsInputPads from './OptionsInputPads'
 import connectIO from '../../impure-react/connectIO'
 
 const selectKeyboardMapping = createSelector(
@@ -44,10 +45,10 @@ const enhance = compose(
         setEditing(key)
       }
     },
-    onKey: ({ editing, onSetKeyCode, setEditing, scratch }) => keyCode => {
+    onKey: ({ editing, onSetKeyCode, setEditing, mode, scratch }) => keyCode => {
       if (editing) {
         onSetKeyCode(keyCode)
-        setEditing(Options.nextKeyToEdit(editing, scratch))
+        setEditing(Options.nextKeyToEdit(editing, mode, scratch))
       }
     }
   })
@@ -59,7 +60,8 @@ class OptionsInput extends React.Component {
     texts: PropTypes.object,
     editing: PropTypes.string,
     onEdit: PropTypes.func,
-    onKey: PropTypes.func
+    onKey: PropTypes.func,
+    mode: PropTypes.string
   }
   render () {
     const className = c('OptionsInput', {
@@ -88,12 +90,21 @@ class OptionsInput extends React.Component {
         ) : null}
         <div className='OptionsInputのzone'>
           <div className='OptionsInputのcontrol'>
-            <OptionsInputKeys
-              keyboardMode={this.props.scratch === 'off'}
-              texts={this.props.texts}
-              editing={this.props.editing}
-              onEdit={this.handleEdit}
-            />
+            {this.props.mode !== 'DP' ? (
+              <OptionsInputKeys
+                keyboardMode={this.props.scratch === 'off'}
+                texts={this.props.texts}
+                editing={this.props.editing}
+                onEdit={this.handleEdit}
+              />
+            ) : (
+              <OptionsInputPads
+                keyboardMode={this.props.scratch === 'off'}
+                texts={this.props.texts}
+                editing={this.props.editing}
+                onEdit={this.handleEdit}
+              />
+            )}
           </div>
           <div className='OptionsInputのtitle'>Keys</div>
         </div>

@@ -26,6 +26,19 @@ export const DEFAULTS = {
   'input.P1.keyboard.KB.6': '75',
   'input.P1.keyboard.KB.7': '76',
 
+  'input.P1.keyboard.DP.LC': '81', // Q
+  'input.P1.keyboard.DP.HO': '65', // A
+  'input.P1.keyboard.DP.HC': '90', // Z
+  'input.P1.keyboard.DP.LP': '88', // X
+  'input.P1.keyboard.DP.LD': '67', // C
+  'input.P1.keyboard.DP.SD': '86', // V
+  'input.P1.keyboard.DP.BD': '32', // SPACE
+  'input.P1.keyboard.DP.LT': '66', // B
+  'input.P1.keyboard.DP.HT': '78', // N
+  'input.P1.keyboard.DP.FT': '77', // M
+  'input.P1.keyboard.DP.RD': '75', // K
+  'input.P1.keyboard.DP.RC': '79', // O
+
   // Note speed
   'player.P1.speed': '1.0',
   'player.P1.lane-cover': '0',

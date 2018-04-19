@@ -57,6 +57,16 @@ class ModeSelectScene extends React.Component {
               </p>
               <p>This mode is similar to beatmaniaIIDX and LR2.</p>
             </div>
+            <div className='ModeSelectSceneのitem' onClick={this.handleDP}>
+              {this.renderBMGraphics()}
+              <h2>Drum Pads Mode</h2>
+              <p>
+                Drum Pads
+              </p>
+              <p>
+                Drum Pads
+              </p>
+            </div>
           </div>
         </div>
         <SceneToolbar>
@@ -154,6 +164,12 @@ class ModeSelectScene extends React.Component {
     this.props.onSetMode('BM')
     SCENE_MANAGER.display(<MusicSelectScene />).done()
     Analytics.send('ModeSelectScene', 'select mode', 'BM')
+  }
+
+  handleDP = () => {
+    this.props.onSetMode('DP')
+    SCENE_MANAGER.display(<MusicSelectScene />).done()
+    Analytics.send('ModeSelectScene', 'select mode', 'DP')
   }
 
   handleBack = () => {

@@ -6,7 +6,7 @@ import c from 'classnames'
 class OptionsInputKey extends React.PureComponent {
   static propTypes = {
     text: PropTypes.string,
-    n: PropTypes.number,
+    n: PropTypes.string,
     isEditing: PropTypes.bool,
     onEdit: PropTypes.func
   }

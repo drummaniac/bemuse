@@ -46,10 +46,10 @@ export const changeLeadTime = leadTime => u({ 'player.P1.lead-time': leadTime })
 
 // Scratch position
 export const scratchPosition = state => {
-  if (state['player.P1.mode'] === 'KB') {
-    return 'off'
-  } else {
+  if (state['player.P1.mode'] === 'BM') {
     return state['player.P1.scratch']
+  } else {
+    return 'off'
   }
 }
 export const changeScratchPosition = position => {
@@ -112,7 +112,13 @@ export const toggleGauge = u({
 // Queries
 export const keyboardMapping = state => {
   let mapping = {}
-  for (let control of ['1', '2', '3', '4', '5', '6', '7', 'SC', 'SC2']) {
+  let controls
+  if (playMode(state) === 'DP') {
+    controls = ['LC', 'HC', 'HO', 'LP', 'LD', 'SD', 'BD', 'LT', 'HT', 'FT', 'RD', 'RC']
+  } else {
+    controls = ['1', '2', '3', '4', '5', '6', '7', 'SC', 'SC2']
+  }
+  for (let control of controls) {
     let key = 'input.P1.keyboard.' + playMode(state) + '.' + control
     mapping[control] = state[key] || ''
   }
@@ -142,9 +148,11 @@ export const updateLastSeenVersion = newVersion =>
   })
 
 // Utils
-export const nextKeyToEdit = (editing, scratch) => {
+export const nextKeyToEdit = (editing, mode, scratch) => {
   const keySet = (() => {
-    if (scratch === 'left') {
+    if (mode === 'DP') {
+      return ['LC', 'HC', 'HO', 'LP', 'LD', 'SD', 'BD', 'LT', 'HT', 'FT', 'RD', 'RC']
+    } else if (scratch === 'left') {
       return ['SC', 'SC2', '1', '2', '3', '4', '5', '6', '7']
     } else if (scratch === 'right') {
       return ['1', '2', '3', '4', '5', '6', '7', 'SC', 'SC2']
